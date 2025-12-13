@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "318848541686",
+    "project_id": "student-group-mana",
+    "storage_bucket": "student-group-mana.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318848541686:android:b1c00677bdeebb45901dd7",
+        "android_client_info": {
+          "package_name": "com.example.student_group_manager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkkd4SqLCCBL37nCoShjzaT0JKWCAciNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
