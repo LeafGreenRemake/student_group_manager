@@ -14,14 +14,17 @@
         <activity
             android:name="com.example.student_group_manager.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:label="@string/app_name">
+            //android:theme="@style/Theme.AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SignUpActivity"
+            />
     </application>
 
 </manifest>

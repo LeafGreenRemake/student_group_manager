@@ -9,7 +9,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="57dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="110dp"
         android:text="שלום!"
         android:textAlignment="center"
         android:textSize="34sp"
@@ -45,7 +45,7 @@
         android:textDirection="ltr" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/sign_up_button"
         android:layout_width="125dp"
         android:layout_height="57dp"
         android:layout_marginLeft="280dp"

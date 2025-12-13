@@ -1,7 +1,9 @@
 package com.example.student_group_manager
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
@@ -21,6 +23,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.login_screen)
 
         auth = Firebase.auth
+
+        val navigationButton: Button = findViewById(R.id.sign_up_button)
+
+        navigationButton.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 
