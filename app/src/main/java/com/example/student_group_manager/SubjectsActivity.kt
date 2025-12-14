@@ -2,6 +2,7 @@ package com.example.student_group_manager
 
 import android.content.Intent
 import android.os.Bundle
+import android.renderscript.Sampler
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -39,5 +40,27 @@ class SubjectsActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+
+        val database = Firebase.database
+        val uid = currentUser?.uid ?: return
+        val teacherRef = database.getReference("teachers").child(uid)
+
+        teacherRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val teacher = snapshot.getValue(Teacher::class.java)
+                if (teacher != null) {
+                    nameEditText.setText(teacher.name)
+                } else {
+                    Log.e("SubjectsActivity", "Teacher data not found")
+                    Toast.makeText(this@SubjectsActivity, "Failed to load teacher name", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("SubjectsActivity", "Database error: ${error.message}")
+                Toast.makeText(this@SubjectsActivity, "Database error: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
