@@ -25,9 +25,15 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         val navigationButton: Button = findViewById(R.id.sign_up_button)
+        val loginButton: Button = findViewById(R.id.login_button)
 
         navigationButton.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+
+        loginButton.setOnClickListener {
+            val intent = Intent(this, SubjectsActivity::class.java)
             startActivity(intent)
         }
     }
