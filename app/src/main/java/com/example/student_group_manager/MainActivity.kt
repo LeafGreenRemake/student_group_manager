@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.google.firebase.database.database
+import javax.security.auth.Subject
 
 
 private lateinit var auth: FirebaseAuth
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            //reload(currentUser)
+            reload(currentUser)
         }
     }
 
@@ -79,10 +80,7 @@ class MainActivity : AppCompatActivity() {
         val uid = currentUser.uid
         val teacherRef = database.getReference("teachers").child(uid)
 
-        // Optional: Fetch teacher data if needed before navigating (e.g., to verify or use name)
-        // But if not necessary here, just navigate directly
         val intent = Intent(this, SubjectsActivity::class.java)
         startActivity(intent)
-        finish()  // Optional: Close MainActivity to prevent back navigation to login
     }
 }
