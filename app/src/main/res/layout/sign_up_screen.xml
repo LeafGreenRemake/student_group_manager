@@ -21,8 +21,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:ems="10"
-        android:inputType="text"
-        android:text="Name" />
+        android:hint="Name"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/email_edittext"
@@ -50,6 +50,7 @@
         android:layout_width="194dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="210dp"
         android:layoutDirection="rtl"
         android:text="סיום הרשמה"
         android:textSize="24sp"
@@ -62,6 +63,7 @@
         android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="255dp"
         android:layoutDirection="rtl"
         android:text="חזרה לכניסה"
         android:textSize="15sp"

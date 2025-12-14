@@ -45,14 +45,25 @@
         android:textDirection="ltr" />
 
     <Button
-        android:id="@+id/sign_up_button"
+        android:id="@+id/login_button"
         android:layout_width="125dp"
         android:layout_height="57dp"
         android:layout_marginLeft="280dp"
         android:layout_marginTop="10dp"
         android:layoutDirection="rtl"
-        android:text="הרשמה"
+        android:text="כניסה"
         android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="105dp"
+        android:layout_height="47dp"
+        android:layout_marginLeft="295dp"
+        android:layout_marginTop="10dp"
+        android:layoutDirection="rtl"
+        android:text="הרשמה"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 </LinearLayout>
