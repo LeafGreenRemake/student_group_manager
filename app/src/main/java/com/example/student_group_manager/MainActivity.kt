@@ -42,6 +42,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun reload() {
-        TODO("Not yet implemented")
+
     }
 }

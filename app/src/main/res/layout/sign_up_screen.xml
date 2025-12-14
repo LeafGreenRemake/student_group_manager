@@ -15,7 +15,7 @@
         android:textSize="34sp" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/name_edittext"
         android:layout_width="388dp"
         android:layout_height="56dp"
         android:layout_marginLeft="10dp"
@@ -25,7 +25,7 @@
         android:text="Name" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/email_edittext"
         android:layout_width="391dp"
         android:layout_height="70dp"
         android:layout_marginLeft="10dp"
@@ -35,21 +35,20 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/editTextNumberPassword"
+        android:id="@+id/password_edittext"
         android:layout_width="391dp"
         android:layout_height="67dp"
         android:layout_marginLeft="10dp"
         android:ems="10"
         android:hint="password"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:layoutDirection="ltr"
         android:textDirection="ltr" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/sign_up_button"
         android:layout_width="194dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="210dp"
         android:layout_marginTop="10dp"
         android:layoutDirection="rtl"
         android:text="סיום הרשמה"
@@ -62,7 +61,6 @@
         android:id="@+id/go_back_button"
         android:layout_width="145dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="256dp"
         android:layout_marginTop="10dp"
         android:layoutDirection="rtl"
         android:text="חזרה לכניסה"
