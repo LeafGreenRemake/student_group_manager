@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
-class StudentsScreenActivity : AppCompatActivity()  {
+class GroupsScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.students_screen)
+        setContentView(R.layout.student_group_screen)
     }
 }

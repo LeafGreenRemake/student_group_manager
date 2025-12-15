@@ -22,9 +22,13 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.student_group_manager.Adapter.ClassroomsAdapter
+import com.example.student_group_manager.data.Classroom
 
 
 private lateinit var auth: FirebaseAuth
+private var classroomsList = mutableListOf<Classroom>()
+private lateinit var adapter: ClassroomsAdapter
 
 
 class ClassroomsScreenActivity : AppCompatActivity() {
@@ -35,6 +39,9 @@ class ClassroomsScreenActivity : AppCompatActivity() {
 
         val logoutButton: Button = findViewById(R.id.logout_button)  // Fixed: Use logout_button, not login_button
         val addButton: Button = findViewById(R.id.add_button)
+        auth = Firebase.auth
+        val currentUser = auth.currentUser
+        val nameEditText: EditText = findViewById(R.id.teacher_name)
 
         logoutButton.setOnClickListener {
             val intent = Intent(this, SubjectsActivity::class.java)
@@ -42,5 +49,32 @@ class ClassroomsScreenActivity : AppCompatActivity() {
         }
 
 
+        val database = Firebase.database
+        val uid = currentUser?.uid ?: return
+        val teacherRef = database.getReference("teachers").child(uid)
+
+
+        teacherRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val teacher = snapshot.getValue(Teacher::class.java)
+                if (teacher != null) {
+                    nameEditText.setText(teacher.name)
+                } else {
+                    Log.e("ClassroomsScreenActivity", "Teacher data not found")
+                    Toast.makeText(this@ClassroomsScreenActivity, "Failed to load teacher name", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("ClassroomsScreenActivity", "Database error: ${error.message}")
+                Toast.makeText(this@ClassroomsScreenActivity, "Database error: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = ClassroomsAdapter(classroomsList)
+        recyclerView.adapter = adapter
     }
 }

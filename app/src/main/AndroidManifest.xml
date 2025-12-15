@@ -28,6 +28,8 @@
             />
         <activity android:name=".ClassroomsScreenActivity"/>
         <activity android:name=".TasksScreenActivity"/>
+        <activity android:name=".GroupsScreenActivity"/>
+        <activity android:name=".StudentsScreenActivity"/>
     </application>
 
 </manifest>
