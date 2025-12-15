@@ -27,6 +27,7 @@
         <activity android:name=".SubjectsActivity"
             />
         <activity android:name=".ClassroomsScreenActivity"/>
+        <activity android:name=".TasksScreenActivity"/>
     </application>
 
 </manifest>
