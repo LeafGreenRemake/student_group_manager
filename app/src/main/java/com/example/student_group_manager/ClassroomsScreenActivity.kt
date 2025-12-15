@@ -31,5 +31,15 @@ class ClassroomsScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.classes_screen)
+
+        val logoutButton: Button = findViewById(R.id.logout_button)  // Fixed: Use logout_button, not login_button
+        val addButton: Button = findViewById(R.id.add_button)
+
+        logoutButton.setOnClickListener {
+            val intent = Intent(this, SubjectsActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }
