@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
+private lateinit var auth: FirebaseAuth
 
 
 class ClassroomsScreenActivity : AppCompatActivity() {
