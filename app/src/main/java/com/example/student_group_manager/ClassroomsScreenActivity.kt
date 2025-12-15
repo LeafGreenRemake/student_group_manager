@@ -76,5 +76,38 @@ class ClassroomsScreenActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = ClassroomsAdapter(classroomsList)
         recyclerView.adapter = adapter
+
+
+
+        val subjectId = intent.getStringExtra("subject_id")
+        if (subjectId.isNullOrEmpty()) {
+            Toast.makeText(this, "No subject ID provided", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+        addButton.setOnClickListener {
+            AddClassroomFragment.newInstance(subjectId).show(supportFragmentManager, "add_classroom_dialog")
+        }
+
+        val classroomsRef = database.getReference("teachers").child(uid).child("subjects").child(subjectId).child("subjectClassrooms")
+        classroomsRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                classroomsList.clear()
+                for (childSnapshot in snapshot.children) {
+                    val classroom = childSnapshot.getValue(Classroom::class.java)
+                    classroom?.let {
+                        it.id = childSnapshot.key ?: ""
+                        classroomsList.add(it)
+                    }
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("ClassroomsScreenActivity", "Classrooms fetch error: ${error.message}")
+                Toast.makeText(this@ClassroomsScreenActivity, "Failed to load classrooms", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

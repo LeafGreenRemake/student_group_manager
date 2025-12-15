@@ -57,7 +57,7 @@ class AddSubjectFragment : DialogFragment() {
             return
         }
 
-        val subject = Subject(key, name, desc, mutableListOf(), mutableListOf())
+        val subject = Subject(key, name, desc, mapOf(), mapOf())
 
         newSubjectRef.setValue(subject)
             .addOnSuccessListener {
