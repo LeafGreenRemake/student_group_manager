@@ -23,7 +23,6 @@ import com.google.firebase.database.database
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-private lateinit var nameEditText: EditText
 private lateinit var auth: FirebaseAuth
 private var subjectsList = mutableListOf<Subject>()
 private lateinit var adapter: SubjectAdapter
@@ -38,7 +37,7 @@ class SubjectsActivity : AppCompatActivity() {
 
         auth = Firebase.auth
         val currentUser = auth.currentUser
-        nameEditText = findViewById(R.id.teacher_name)
+        val nameEditText: EditText = findViewById(R.id.teacher_name)
         val logoutButton: Button = findViewById(R.id.logout_button)  // Fixed: Use logout_button, not login_button
         val addButton: Button = findViewById(R.id.add_button)
 
