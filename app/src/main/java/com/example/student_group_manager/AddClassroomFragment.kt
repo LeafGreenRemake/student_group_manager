@@ -15,13 +15,18 @@ import com.google.firebase.database.database
 class AddClassroomFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
+        return activity?.let { activity ->
+            val builder = AlertDialog.Builder(activity)
             val inflater = requireActivity().layoutInflater
             val view: View = inflater.inflate(R.layout.fragment_add_classroom, null)
 
             builder.setView(view)
                 .setTitle("Add New Classroom")
+                .setPositiveButton("Save") {_, _ ->}
+                .setNegativeButton("Cancel") {dialog, _ -> dialog.cancel() }
+
+                    
+
                 .setPositiveButton("Save") { dialog, id ->
                     val nameEt = view.findViewById<EditText>(R.id.classroom_name_et)
 

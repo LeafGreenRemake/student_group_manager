@@ -35,21 +35,21 @@
         android:padding="16dp">
 
         <Button
+            android:id="@+id/students_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:text="תלמידים"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
             android:id="@+id/groups_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layoutDirection="rtl"
             android:text="קבוצות"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/students_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layoutDirection="rtl"
-            android:text="תלמידים"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

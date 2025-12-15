@@ -38,7 +38,7 @@ class StudentsScreenActivity : AppCompatActivity() {
         val nameEditText: EditText = findViewById(R.id.teacher_name)
 
         logoutButton.setOnClickListener {
-            val intent = Intent(this, SubjectsActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
