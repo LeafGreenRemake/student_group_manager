@@ -35,8 +35,7 @@ class AddSubjectFragment : DialogFragment() {
                         return@setPositiveButton
                     }
 
-                    val subject = Subject(name, desc, mutableListOf(), mutableListOf())
-                    saveSubjectToDatabase(subject)
+                    saveSubjectToDatabase(name, desc)
                 }
                 .setNegativeButton("Cancel") { dialog, id ->
                     dialog.cancel()
@@ -45,12 +44,20 @@ class AddSubjectFragment : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    private fun saveSubjectToDatabase(subject: Subject) {
+    private fun saveSubjectToDatabase(name: String, desc: String) {
         val auth = FirebaseAuth.getInstance()
         val database = Firebase.database
         val uid = auth.currentUser?.uid ?: return
         val subjectsRef = database.getReference("teachers").child(uid).child("subjects")
         val newSubjectRef = subjectsRef.push()  // Generates unique key
+
+        val key = newSubjectRef.key
+        if (key == null) {
+            Toast.makeText(requireContext(), "Failed to generate unique ID", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val subject = Subject(key, name, desc, mutableListOf(), mutableListOf())
 
         newSubjectRef.setValue(subject)
             .addOnSuccessListener {

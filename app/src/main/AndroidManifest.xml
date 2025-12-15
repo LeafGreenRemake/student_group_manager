@@ -26,6 +26,7 @@
             />
         <activity android:name=".SubjectsActivity"
             />
+        <activity android:name=".ClassroomsScreenActivity"/>
     </application>
 
 </manifest>

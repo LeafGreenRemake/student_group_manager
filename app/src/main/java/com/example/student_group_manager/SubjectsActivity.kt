@@ -85,11 +85,15 @@ class SubjectsActivity : AppCompatActivity() {
 
         val subjectsRef = database.getReference("teachers").child(uid).child("subjects")
         subjectsRef.addValueEventListener(object : ValueEventListener {
+            // In the subjectsRef.addValueEventListener block:
             override fun onDataChange(snapshot: DataSnapshot) {
                 subjectsList.clear()
                 for (childSnapshot in snapshot.children) {
                     val subject = childSnapshot.getValue(Subject::class.java)
-                    subject?.let { subjectsList.add(it) }
+                    subject?.let {
+                        it.id = childSnapshot.key ?: ""  // Set the Firebase key as id
+                        subjectsList.add(it)
+                    }
                 }
                 adapter.notifyDataSetChanged()
             }
