@@ -59,7 +59,7 @@ class AddClassroomFragment : DialogFragment() {
             return
         }
 
-        val classroom = Classroom(key, name, mutableListOf(), mutableListOf())
+        val classroom = Classroom(key, name, mapOf(), mapOf())
 
         newClassroomRef.setValue(classroom)
             .addOnSuccessListener {

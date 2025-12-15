@@ -72,19 +72,18 @@ class ClassroomsScreenActivity : AppCompatActivity() {
         })
 
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ClassroomsAdapter(classroomsList)
-        recyclerView.adapter = adapter
-
-
-
         val subjectId = intent.getStringExtra("subject_id")
         if (subjectId.isNullOrEmpty()) {
             Toast.makeText(this, "No subject ID provided", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
+
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = ClassroomsAdapter(classroomsList, subjectId)
+        recyclerView.adapter = adapter
+
 
         addButton.setOnClickListener {
             AddClassroomFragment.newInstance(subjectId).show(supportFragmentManager, "add_classroom_dialog")

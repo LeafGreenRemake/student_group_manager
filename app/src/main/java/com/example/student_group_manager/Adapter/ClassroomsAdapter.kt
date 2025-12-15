@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.student_group_manager.ClassroomsScreenActivity
 import com.example.student_group_manager.GroupsScreenActivity
 import com.example.student_group_manager.R
 import com.example.student_group_manager.StudentsScreenActivity
-import com.example.student_group_manager.TasksScreenActivity
 import com.example.student_group_manager.data.Classroom
 
-
-class ClassroomsAdapter(private val classrooms: MutableList<Classroom>) : RecyclerView.Adapter<ClassroomsAdapter.ViewHolder>() {
+class ClassroomsAdapter(
+    private val classrooms: MutableList<Classroom>,
+    private val subjectId: String  // Add this
+) : RecyclerView.Adapter<ClassroomsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameTv: TextView = view.findViewById(R.id.classroom_name_tv)
@@ -35,18 +35,17 @@ class ClassroomsAdapter(private val classrooms: MutableList<Classroom>) : Recycl
         holder.groupsButton.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, GroupsScreenActivity::class.java)
-            intent.putExtra("classrooom_id", classroom.id)  // Pass ID for Firebase queries
-            intent.putExtra("classroom_name", classroom.name)  // Pass name for display
-            // Optionally pass more data, e.g., intent.putExtra("subject_description", subject.description)
+            intent.putExtra("classroom_id", classroom.id)
+            intent.putExtra("classroom_name", classroom.name)
             context.startActivity(intent)
         }
 
         holder.studentsButton.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, StudentsScreenActivity::class.java)
-            intent.putExtra("classroom_id", classroom.id)  // Pass ID for Firebase queries
-            intent.putExtra("classroom_name", classroom.name)  // Pass name for display
-            // Optionally pass more data, e.g., intent.putExtra("subject_description", subject.description)
+            intent.putExtra("subject_id", subjectId)  // Pass subject ID
+            intent.putExtra("classroom_id", classroom.id)  // Pass classroom ID
+            intent.putExtra("classroom_name", classroom.name)
             context.startActivity(intent)
         }
     }

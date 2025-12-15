@@ -1,7 +1,8 @@
 package com.example.student_group_manager.data
 
 data class Group(
+    var id: String = "",
     val groupSize: Int = 0,
-    val groupStudent: MutableList<Student> = mutableListOf(),
-    val groupTasks: MutableList<TaskInstance> = mutableListOf()
+    val groupStudent: Map<String, Student> = mapOf(),
+    val groupTasks: Map<String, TaskInstance> = mapOf()
 )
