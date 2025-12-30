@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.student_group_manager.R
@@ -29,6 +30,7 @@ class SignUpActivity : AppCompatActivity() {
         val emailEditText: EditText = findViewById(R.id.email_edittext)
         val passwordEditText: EditText = findViewById(R.id.password_edittext)
         val signUpButton: Button = findViewById(R.id.sign_up_button)
+        val toggleButton: ToggleButton = findViewById(R.id.toggleButton)
         auth = Firebase.auth
 
         goBackButton.setOnClickListener {

@@ -68,7 +68,7 @@ class AddStudentFragment : DialogFragment() {
             return
         }
 
-        val student = Student(key, name)
+        val student = Student(key, name, mapOf())
 
         newStudentRef.setValue(student)
             .addOnSuccessListener {
