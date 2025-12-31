@@ -9,6 +9,7 @@ import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.student_group_manager.R
+import com.example.student_group_manager.data.Student
 import com.example.student_group_manager.data.Teacher
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -33,9 +34,19 @@ class SignUpActivity : AppCompatActivity() {
         val toggleButton: ToggleButton = findViewById(R.id.toggleButton)
         auth = Firebase.auth
 
+        var is_a_student: Boolean = true
+
         goBackButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        }
+
+        toggleButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                is_a_student = false
+            } else {
+                is_a_student = true
+            }
         }
 
         signUpButton.setOnClickListener {
@@ -53,7 +64,12 @@ class SignUpActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) {task ->
                     if (task.isSuccessful) {
                         val userId = auth.currentUser?.uid
-                        saveTeacherToDatabase(userId, name, email)
+
+                        if (is_a_student) {
+                            saveStudentToDatabase(userId, name, email)
+                        } else {
+                            saveTeacherToDatabase(userId, name, email)
+                        }
                     } else {
                         Toast.makeText(this, "Signup failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }
@@ -61,6 +77,30 @@ class SignUpActivity : AppCompatActivity() {
         }
 
     }
+
+
+    private fun saveStudentToDatabase(userId: String?, name: String, email: String) {
+        if (userId == null) {
+            Toast.makeText(this, "Error: Student ID not found", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val database = Firebase.database
+        val studentRef = database.getReference("students").child(userId)
+        val student = Student(name, email)
+
+        studentRef.setValue(student)
+            .addOnSuccessListener {
+                Toast.makeText(this, "נרשמת בהצלחה, מוזמנים להשתמש באפליקציה!", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to save user: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+    }
+
 
     private fun saveTeacherToDatabase(userId: String?, name: String, email: String) {
         if (userId == null) {

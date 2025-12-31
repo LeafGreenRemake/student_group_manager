@@ -50,6 +50,7 @@
         android:layout_width="141dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="260dp"
+        android:layout_marginBottom="30dp"
         android:text="ToggleButton"
         android:textOff="אני תלמיד/ה"
         android:textOn="אני מורה"
