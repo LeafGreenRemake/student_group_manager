@@ -23,4 +23,22 @@
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/group_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layoutDirection="rtl"
+            android:text="צפייה בקבוצה שלי"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
