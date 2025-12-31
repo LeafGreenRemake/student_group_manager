@@ -87,7 +87,7 @@ class SignUpActivity : AppCompatActivity() {
 
         val database = Firebase.database
         val studentRef = database.getReference("students").child(userId)
-        val student = Student(name, email)
+        val student = Student(userId, name, mapOf())
 
         studentRef.setValue(student)
             .addOnSuccessListener {

@@ -30,6 +30,7 @@
         <activity android:name=".TasksScreenActivity"/>
         <activity android:name=".GroupsScreenActivity"/>
         <activity android:name=".StudentsScreenActivity"/>
+        <activity android:name=".ClassroomsOfStudents"/>
     </application>
 
 </manifest>

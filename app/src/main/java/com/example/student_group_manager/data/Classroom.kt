@@ -4,5 +4,5 @@ data class Classroom(
     var id: String = "",
     val name: String = "",
     val students: Map<String, Student> = mapOf(),
-    val classroomGroups: Map<String, Group> = mapOf()
+    val classroomGroups: Map<Int, String> = mapOf()
 )
