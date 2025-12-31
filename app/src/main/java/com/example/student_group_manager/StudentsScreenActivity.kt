@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import kotlin.random.Random
 
 private lateinit var auth: FirebaseAuth
 private var studentsList = mutableListOf<Student>()
@@ -83,7 +84,7 @@ class StudentsScreenActivity : AppCompatActivity() {
         }
 
         addButton.setOnClickListener {
-            AddStudentFragment.newInstance(subjectId, classroomId).show(supportFragmentManager, "add_student_dialog")
+            generateJoinCode(subjectId, classroomId)
         }
 
         val studentsRef = database.getReference("teachers").child(uid).child("subjects").child(subjectId).child("subjectClassrooms").child(classroomId).child("classroomStudents")
@@ -103,6 +104,38 @@ class StudentsScreenActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 Log.e("StudentsScreenActivity", "Students fetch error: ${error.message}")
                 Toast.makeText(this@StudentsScreenActivity, "Failed to load students", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun generateJoinCode(subjectId: String, classroomId: String) {
+        val database = Firebase.database
+        val joinCodesRef = database.getReference("join_codes")
+
+        var code = Random.nextInt(1000000, 9999999).toString()  // 7-digit random
+
+        // Check if code exists; if yes, regenerate (recursive, but low collision risk)
+        joinCodesRef.child(code).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    // Code taken, regenerate
+                    generateJoinCode(subjectId, classroomId)
+                } else {
+                    // Save code -> classroom path
+                    val classroomPath = "teachers/${auth.uid}/subjects/$subjectId/subjectClassrooms/$classroomId"
+                    joinCodesRef.child(code).setValue(classroomPath)
+                        .addOnSuccessListener {
+                            Toast.makeText(this@StudentsScreenActivity, "Join code generated: $code", Toast.LENGTH_LONG).show()
+                            // Optional: Copy to clipboard or show dialog
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this@StudentsScreenActivity, "Failed to generate code: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@StudentsScreenActivity, "Error checking code: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
