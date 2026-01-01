@@ -110,7 +110,7 @@ class ClassroomsOfStudents : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Join Classroom")
             .setView(input)
-            .setPositiveButton("Join") { _, _ ->
+            .setPositiveButton("הצטרפות") { _, _ ->
                 val code = input.text.toString().trim()
                 if (code.length == 7 && code.all { it.isDigit() }) {
                     joinClassroomWithCode(studentId, code)
@@ -118,7 +118,7 @@ class ClassroomsOfStudents : AppCompatActivity() {
                     Toast.makeText(this, "Invalid code format", Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            .setNegativeButton("ביטול") { dialog, _ -> dialog.cancel() }
             .show()
     }
 
@@ -147,8 +147,8 @@ class ClassroomsOfStudents : AppCompatActivity() {
                                             if (student != null) {
                                                 // Update both sides atomically
                                                 val updates = mutableMapOf<String, Any>()
-                                                // Add student to classroom.students (full Student)
-                                                updates["$classroomPath/students/$studentId"] = student
+                                                // Add only student ID to classroom.students (as true)
+                                                updates["$classroomPath/students/$studentId"] = true
                                                 // Add classroom to student.classrooms (id to name)
                                                 updates["students/$studentId/classrooms/$classroomId"] = classroom.name
                                                 database.reference.updateChildren(updates)
