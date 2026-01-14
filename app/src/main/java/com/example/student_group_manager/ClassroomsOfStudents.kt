@@ -147,15 +147,17 @@ class ClassroomsOfStudents : AppCompatActivity() {
                                             if (student != null) {
                                                 // Update both sides atomically
                                                 val updates = mutableMapOf<String, Any>()
+
                                                 // Add only student ID to classroom.students (as true)
                                                 updates["$classroomPath/students/$studentId"] = true
                                                 // Add classroom to student.classrooms (id to name)
+
                                                 updates["students/$studentId/classrooms/$classroomId"] = classroom.name
                                                 database.reference.updateChildren(updates)
                                                     .addOnSuccessListener {
                                                         Toast.makeText(this@ClassroomsOfStudents, "Joined classroom successfully!", Toast.LENGTH_SHORT).show()
                                                         // Optional: Remove code if single-use
-                                                        joinCodesRef.removeValue()
+                                                        //joinCodesRef.removeValue()
                                                     }
                                                     .addOnFailureListener { e ->
                                                         Toast.makeText(this@ClassroomsOfStudents, "Failed to join: ${e.message}", Toast.LENGTH_SHORT).show()
