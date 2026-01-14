@@ -28,16 +28,21 @@ class ClassroomsOfStudentAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val classroom = classrooms[position]
+
         holder.nameTv.text = classroom.name
 
         holder.groupButton.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, ClassGroupOfStudentActivity::class.java)
+
+            intent.putExtra("teacher_id", classroom.teacherId)
+            intent.putExtra("subject_id", classroom.subjectId)
             intent.putExtra("classroom_id", classroom.id)
-            intent.putExtra("classroom_name", classroom.id)
+
             context.startActivity(intent)
         }
     }
+
 
     override fun getItemCount(): Int = classrooms.size
 }

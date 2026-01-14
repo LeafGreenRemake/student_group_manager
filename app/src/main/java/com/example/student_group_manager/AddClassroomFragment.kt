@@ -64,7 +64,7 @@ class AddClassroomFragment : DialogFragment() {
             return
         }
 
-        val classroom = Classroom(key, name, mapOf(), mapOf())
+        val classroom = Classroom(key, uid, subjectId, name, mapOf(), mapOf())
 
         newClassroomRef.setValue(classroom)
             .addOnSuccessListener {

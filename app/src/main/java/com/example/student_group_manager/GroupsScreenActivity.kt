@@ -120,30 +120,27 @@ class GroupsScreenActivity : AppCompatActivity() {
                         val groupsRef = classroomRef.child("groups")
 
                         for (i in 0 until groupNum) {
-                            val groupStudents = mutableMapOf<String, String>()  // Changed to String keys
+
+                            val groupStudents = mutableMapOf<String, String>()
+
                             for (j in 0 until groupSize) {
                                 val studentIndex = i * groupSize + j
-                                groupStudents[j.toString()] = studentsList[studentIndex].id  // Use j.toString() as key
+                                groupStudents[j.toString()] = studentsList[studentIndex].id
                             }
 
                             val newGroup = Group(
-                                id = "",  // Will be set by push
+                                id = "",
+                                groupNumber = i + 1, // 👈 group number
                                 groupSize = groupSize,
-                                groupColor = String.format("#%06X", Random.nextInt(0xFFFFFF + 1)),  // Random color
+                                groupColor = String.format("#%06X", Random.nextInt(0xFFFFFF + 1)),
                                 groupStudent = groupStudents
                             )
 
-                            // Save group and get ID
                             val newGroupRef = groupsRef.push()
                             newGroup.id = newGroupRef.key ?: continue
                             newGroupRef.setValue(newGroup)
-                                .addOnFailureListener { e ->
-                                    Log.e("GroupsScreenActivity", "Failed to save group: ${e.message}")
-                                }
-
-                            // Update classroom's classroomGroups with sequential key
-                            existingGroups[existingGroups.size] = newGroup.id
                         }
+
 
                         // Update classroom with new groups map
                         classroomRef.child("classroomGroups").setValue(existingGroups)
