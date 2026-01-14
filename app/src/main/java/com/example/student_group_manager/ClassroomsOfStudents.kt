@@ -89,9 +89,13 @@ class ClassroomsOfStudents : AppCompatActivity() {
                 val student = snapshot.getValue(Student::class.java)
                 if (student != null) {
                     classroomsList.clear()
-                    student.classrooms?.forEach { (classroomId, classroomName) ->
-                        // Fetch full Classroom (assuming you store ID to name; fetch more if needed)
-                        val classroom = Classroom(id = classroomId, name = classroomName)
+                    student.classrooms?.forEach { (classroomId, classroomMap) ->
+                        val classroom = Classroom(
+                            id = classroomId,
+                            name = classroomMap["name"] ?: "",
+                            teacherId = classroomMap["teacherId"] ?: "",  // 👈 New
+                            subjectId = classroomMap["subjectId"] ?: ""   // 👈 New
+                        )
                         classroomsList.add(classroom)
                     }
                     adapter.notifyDataSetChanged()
@@ -145,19 +149,23 @@ class ClassroomsOfStudents : AppCompatActivity() {
                                         override fun onDataChange(studentSnapshot: DataSnapshot) {
                                             val student = studentSnapshot.getValue(Student::class.java)
                                             if (student != null) {
-                                                // Update both sides atomically
+                                                // Inside the studentSnapshot onDataChange, replace the updates block with:
                                                 val updates = mutableMapOf<String, Any>()
 
-                                                // Add only student ID to classroom.students (as true)
                                                 updates["$classroomPath/students/$studentId"] = true
-                                                // Add classroom to student.classrooms (id to name)
 
-                                                updates["students/$studentId/classrooms/$classroomId"] = classroom.name
+// 👈 Store nested map for classroom details
+                                                val classroomDetails = mapOf(
+                                                    "name" to classroom.name,
+                                                    "teacherId" to classroomPath.split("/")[1],  // teachers/{teacherId}/...
+                                                    "subjectId" to classroomPath.split("/")[3]   // .../subjects/{subjectId}/...
+                                                )
+                                                updates["students/$studentId/classrooms/$classroomId"] = classroomDetails
+
                                                 database.reference.updateChildren(updates)
                                                     .addOnSuccessListener {
                                                         Toast.makeText(this@ClassroomsOfStudents, "Joined classroom successfully!", Toast.LENGTH_SHORT).show()
-                                                        // Optional: Remove code if single-use
-                                                        //joinCodesRef.removeValue()
+                                                        // joinCodesRef.removeValue() if needed
                                                     }
                                                     .addOnFailureListener { e ->
                                                         Toast.makeText(this@ClassroomsOfStudents, "Failed to join: ${e.message}", Toast.LENGTH_SHORT).show()

@@ -121,19 +121,19 @@ class GroupsScreenActivity : AppCompatActivity() {
 
                         for (i in 0 until groupNum) {
 
-                            val groupStudents = mutableMapOf<String, String>()
+                            val groupStudents = mutableListOf<String>()  // 👈 Changed to MutableList<String>
 
                             for (j in 0 until groupSize) {
                                 val studentIndex = i * groupSize + j
-                                groupStudents[j.toString()] = studentsList[studentIndex].id
+                                groupStudents.add(studentsList[studentIndex].id)  // 👈 Add directly to list
                             }
 
                             val newGroup = Group(
                                 id = "",
-                                groupNumber = i + 1, // 👈 group number
+                                groupNumber = i + 1,
                                 groupSize = groupSize,
                                 groupColor = String.format("#%06X", Random.nextInt(0xFFFFFF + 1)),
-                                groupStudent = groupStudents
+                                groupStudent = groupStudents  // 👈 Now a List
                             )
 
                             val newGroupRef = groupsRef.push()
