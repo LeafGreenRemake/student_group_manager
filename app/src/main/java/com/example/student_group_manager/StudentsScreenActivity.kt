@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import kotlin.random.Random
+import android.os.Handler
+import android.os.Looper
 
 private lateinit var auth: FirebaseAuth
 private var studentsList = mutableListOf<Student>()
@@ -146,7 +148,16 @@ class StudentsScreenActivity : AppCompatActivity() {
                         .addOnSuccessListener {
                             generatedCode.text = "הקוד להצטרפות לכיתה הינו; $code"
                             Toast.makeText(this@StudentsScreenActivity, "Join code generated: $code", Toast.LENGTH_LONG).show()
-                            // Optional: Copy to clipboard or show dialog
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                joinCodesRef.child(code).removeValue()
+                                    .addOnSuccessListener {
+                                        Log.d("StudentsScreenActivity", "Join code $code auto-removed after 10 minutes")
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.e("StudentsScreenActivity", "Failed to auto-remove code: ${e.message}")
+                                    }
+                            }, 10 * 60 * 1000)
                         }
                         .addOnFailureListener { e ->
                             Toast.makeText(this@StudentsScreenActivity, "Failed to generate code: ${e.message}", Toast.LENGTH_SHORT).show()
