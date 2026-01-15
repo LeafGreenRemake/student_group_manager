@@ -107,7 +107,7 @@ class ClassGroupOfStudentActivity: AppCompatActivity() {
             rootLayout.setBackgroundColor(Color.WHITE)
         }
 
-        groupText.setText("Group ${group.groupNumber}")
+        groupText.setText("${group.groupNumber}")
 
         if (group.groupImageResId != 0) {
             groupIconImageView.setImageResource(group.groupImageResId)
