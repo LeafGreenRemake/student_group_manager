@@ -6,5 +6,6 @@ data class Group(
     val groupNumber: Int = 0,
     val groupSize: Int = 0,
     val groupColor: String = "#FFFFFF",
-    val groupStudent: List<String> = listOf()
+    val groupStudent: List<String> = listOf(),
+    val groupImageResId: Int = 0
 )

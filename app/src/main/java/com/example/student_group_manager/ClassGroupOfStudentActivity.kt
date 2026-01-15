@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -98,6 +99,7 @@ class ClassGroupOfStudentActivity: AppCompatActivity() {
     private fun applyGroupUI(group: Group) {
         val rootLayout = findViewById<View>(R.id.rootLayout)
         val groupText = findViewById<TextView>(R.id.groupNumberText)
+        val groupIconImageView = findViewById<ImageView>(R.id.group_icon_imageview)
 
         try {
             rootLayout.setBackgroundColor(group.groupColor.toColorInt())
@@ -106,6 +108,13 @@ class ClassGroupOfStudentActivity: AppCompatActivity() {
         }
 
         groupText.setText("Group ${group.groupNumber}")
+
+        if (group.groupImageResId != 0) {
+            groupIconImageView.setImageResource(group.groupImageResId)
+        } else {
+            // Fallback (e.g., hide or set a default icon)
+            groupIconImageView.visibility = View.GONE
+        }
     }
 
 }

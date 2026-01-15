@@ -119,6 +119,14 @@ class GroupsScreenActivity : AppCompatActivity() {
                         val existingGroups = classroom.classroomGroups.toMutableMap()
                         val groupsRef = classroomRef.child("groups")
 
+                        val groupIcons = listOf(
+                            R.drawable.outline_cookie_24,
+                            R.drawable.outline_cruelty_free_24,
+                            R.drawable.outline_dark_mode_24,
+                            R.drawable.outline_deceased_24,
+                            R.drawable.outline_light_mode_24
+                        )
+
                         for (i in 0 until groupNum) {
 
                             val groupStudents = mutableListOf<String>()  // 👈 Changed to MutableList<String>
@@ -128,12 +136,15 @@ class GroupsScreenActivity : AppCompatActivity() {
                                 groupStudents.add(studentsList[studentIndex].id)  // 👈 Add directly to list
                             }
 
+                            val randomIcon = groupIcons[Random.nextInt(groupIcons.size)]
+
                             val newGroup = Group(
                                 id = "",
                                 groupNumber = i + 1,
                                 groupSize = groupSize,
                                 groupColor = String.format("#%06X", Random.nextInt(0xFFFFFF + 1)),
-                                groupStudent = groupStudents  // 👈 Now a List
+                                groupStudent = groupStudents,
+                                groupImageResId = randomIcon
                             )
 
                             val newGroupRef = groupsRef.push()
