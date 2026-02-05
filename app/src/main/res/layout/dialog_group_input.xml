@@ -7,27 +7,32 @@
 
     <EditText
         android:id="@+id/edit_group_num"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Number of Groups"
-        android:inputType="number" />
+        android:layout_width="380dp"
+        android:layout_height="57dp"
+        android:hint="מספר קבוצות:"
+        android:inputType="number"
+        android:textDirection="rtl" />
+
+    <!-- Default to checked/on -->
 
     <ToggleButton
         android:id="@+id/toggle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textOff="Toggle 1 Off"
-        android:textOn="Toggle 1 On"
+        android:layout_marginLeft="250dp"
         android:layout_marginTop="8dp"
-        android:checked="true" />  <!-- Default to checked/on -->
+        android:checked="false"
+        android:textOff="ללא חלוקת קבוצות לפי צבעים"
+        android:textOn="חלוקת קבוצות לפי צבעים" />
 
     <ToggleButton
         android:id="@+id/toggle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textOff="Toggle 2 Off"
-        android:textOn="Toggle 2 On"
+        android:layout_marginLeft="250dp"
         android:layout_marginTop="8dp"
-        android:checked="false" />  <!-- Default to unchecked/off -->
+        android:checked="false"
+        android:textOff="ללא חלוקת קבוצות לפי סמלים"
+        android:textOn="חלוקת קבוצות לפי סמלים" />  <!-- Default to unchecked/off -->
 
 </LinearLayout>

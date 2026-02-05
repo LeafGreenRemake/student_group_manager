@@ -11,8 +11,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.student_group_manager.data.Classroom
+import com.example.student_group_manager.data.ColorGroup
 import com.example.student_group_manager.data.Group
 import com.example.student_group_manager.data.Student
+import com.example.student_group_manager.data.SymbolGroup
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -101,7 +103,7 @@ class GroupsScreenActivity : AppCompatActivity() {
             val toggle2 = customView.findViewById<ToggleButton>(R.id.toggle2)
 
             AlertDialog.Builder(this)
-                .setTitle("Enter Number of Groups")
+                .setTitle("אפשרויות יצירת קבוצות")
                 .setView(customView)  // Use the custom view instead of just the EditText
                 .setPositiveButton("OK") { _, _ ->
                     val groupNumStr = input.text.toString()
@@ -121,10 +123,10 @@ class GroupsScreenActivity : AppCompatActivity() {
 
                     // Example: Conditionally shuffle based on toggle1
                     if (isToggle1Enabled) {
-                        studentsList.shuffle()
+                        //studentsList.shuffle()
                     } else {
                         // Optionally sort or handle differently, e.g., by name
-                        studentsList.sortBy { it.name }  // Assuming Student has a 'name' property
+                        //studentsList.sortBy { it.name }  // Assuming Student has a 'name' property
                     }
 
                     // Example: Allow uneven groups if toggle2 is enabled
@@ -134,12 +136,15 @@ class GroupsScreenActivity : AppCompatActivity() {
                     }
 
                     // Proceed with group creation (rest of your code remains the same)
-                    val groupSize = studentsList.size / groupNum  // This may be uneven if toggle2 allows it
+                    val groupSize = studentsList.size / groupNum
                     val classroomRef = database.getReference("teachers").child(uid).child("subjects").child(subjectId).child("subjectClassrooms").child(classroomId)
                     classroomRef.get().addOnSuccessListener { classroomSnapshot ->
                         val classroom = classroomSnapshot.getValue(Classroom::class.java) ?: return@addOnSuccessListener
                         val existingGroups = classroom.classroomGroups.toMutableMap()
+
                         val groupsRef = classroomRef.child("groups")
+                        val colorGroupsRef = classroomRef.child("colorGroups")
+                        val symbolGroupsRef = classroomRef.child("symbolGroups")
 
                         val groupIcons = listOf(
                             R.drawable.outline_cookie_24,
@@ -163,14 +168,32 @@ class GroupsScreenActivity : AppCompatActivity() {
                                 id = "",
                                 groupNumber = i + 1,
                                 groupSize = groupStudents.size,  // Use actual size to handle uneven
+                                groupStudent = groupStudents
+                            )
+
+                            val newColorGroup = ColorGroup(
+                                id = "",
                                 groupColor = String.format("#%06X", Random.nextInt(0xFFFFFF + 1)),
-                                groupStudent = groupStudents,
-                                groupImageResId = randomIcon
+                                groupStudent = groupStudents
+                            )
+
+                            val newSymbolGroup = SymbolGroup(
+                                id = "",
+                                groupImageResId = randomIcon,
+                                groupStudent = groupStudents
                             )
 
                             val newGroupRef = groupsRef.push()
                             newGroup.id = newGroupRef.key ?: continue
                             newGroupRef.setValue(newGroup)
+
+                            val newColorGroupRef = colorGroupsRef.push()
+                            newColorGroup.id = newColorGroupRef.key ?: continue
+                            newColorGroupRef.setValue(newColorGroup)
+
+                            val newSymbolGroupRef = symbolGroupsRef.push()
+                            newSymbolGroup.id = newSymbolGroupRef.key ?: continue
+                            newSymbolGroupRef.setValue(newSymbolGroup)
                         }
 
                         // Update classroom with new groups map
