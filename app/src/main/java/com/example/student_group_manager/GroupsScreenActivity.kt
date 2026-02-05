@@ -41,7 +41,8 @@ class GroupsScreenActivity : AppCompatActivity() {
         logoutButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-975        }
+            975
+        }
 
         val database = Firebase.database
         val uid = currentUser?.uid ?: return
@@ -60,7 +61,9 @@ class GroupsScreenActivity : AppCompatActivity() {
         }
 
         // Load students (similar to StudentsScreenActivity)
-        val studentsRef = database.getReference("teachers").child(uid).child("subjects").child(subjectId).child("subjectClassrooms").child(classroomId).child("students")
+        val studentsRef =
+            database.getReference("teachers").child(uid).child("subjects").child(subjectId)
+                .child("subjectClassrooms").child(classroomId).child("students")
         studentsRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 studentsList.clear()
@@ -79,14 +82,21 @@ class GroupsScreenActivity : AppCompatActivity() {
                             }
                         }
                         .addOnFailureListener { e ->
-                            Log.e("GroupsScreenActivity", "Failed to fetch student $studentId: ${e.message}")
+                            Log.e(
+                                "GroupsScreenActivity",
+                                "Failed to fetch student $studentId: ${e.message}"
+                            )
                         }
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.e("GroupsScreenActivity", "Students fetch error: ${error.message}")
-                Toast.makeText(this@GroupsScreenActivity, "Failed to load students", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@GroupsScreenActivity,
+                    "Failed to load students",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
 
@@ -113,7 +123,8 @@ class GroupsScreenActivity : AppCompatActivity() {
                     }
                     val groupNum = groupNumStr.toIntOrNull()
                     if (groupNum == null || groupNum <= 0) {
-                        Toast.makeText(this, "Group number must be positive", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Group number must be positive", Toast.LENGTH_SHORT)
+                            .show()
                         return@setPositiveButton
                     }
 
@@ -121,25 +132,37 @@ class GroupsScreenActivity : AppCompatActivity() {
                     val isToggle1Enabled = toggle1.isChecked
                     val isToggle2Enabled = toggle2.isChecked
 
-                    // Example: Conditionally shuffle based on toggle1
-                    if (isToggle1Enabled) {
-                        //studentsList.shuffle()
-                    } else {
-                        // Optionally sort or handle differently, e.g., by name
-                        //studentsList.sortBy { it.name }  // Assuming Student has a 'name' property
+                    // Helper function to create grouped student IDs
+                    fun createGroupedStudents(shuffle: Boolean): List<List<String>> {
+                        val list = studentsList.map { it.id }.toMutableList()  // Copy IDs
+                        if (shuffle) list.shuffle()
+                        val groupSize = studentsList.size / groupNum
+                        return (0 until groupNum).map { i ->
+                            val startIndex = i * groupSize
+                            val endIndex =
+                                if (i == groupNum - 1) list.size else startIndex + groupSize
+                            list.subList(startIndex, endIndex)
+                        }
                     }
 
-                    // Example: Allow uneven groups if toggle2 is enabled
-                    if (!isToggle2Enabled && studentsList.size % groupNum != 0) {
-                        Toast.makeText(this, "Group number must divide total students (${studentsList.size}) evenly", Toast.LENGTH_SHORT).show()
-                        return@setPositiveButton
-                    }
+                    // Compute base grouping (shuffled by default for standard groups)
+                    val baseGrouped = createGroupedStudents(shuffle = true)
 
-                    // Proceed with group creation (rest of your code remains the same)
-                    val groupSize = studentsList.size / groupNum
-                    val classroomRef = database.getReference("teachers").child(uid).child("subjects").child(subjectId).child("subjectClassrooms").child(classroomId)
+                    // Compute color grouping: different shuffle if toggle1 checked, else reuse base
+                    val colorGrouped =
+                        if (isToggle1Enabled) createGroupedStudents(shuffle = true) else baseGrouped
+
+                    // Compute symbol grouping: different shuffle if toggle2 checked, else reuse base
+                    val symbolGrouped =
+                        if (isToggle2Enabled) createGroupedStudents(shuffle = true) else baseGrouped
+
+                    // Proceed with group creation
+                    val classroomRef =
+                        database.getReference("teachers").child(uid).child("subjects")
+                            .child(subjectId).child("subjectClassrooms").child(classroomId)
                     classroomRef.get().addOnSuccessListener { classroomSnapshot ->
-                        val classroom = classroomSnapshot.getValue(Classroom::class.java) ?: return@addOnSuccessListener
+                        val classroom = classroomSnapshot.getValue(Classroom::class.java)
+                            ?: return@addOnSuccessListener
                         val existingGroups = classroom.classroomGroups.toMutableMap()
 
                         val groupsRef = classroomRef.child("groups")
@@ -155,32 +178,29 @@ class GroupsScreenActivity : AppCompatActivity() {
                         )
 
                         for (i in 0 until groupNum) {
-                            val groupStudents = mutableListOf<String>()
-                            val startIndex = i * groupSize
-                            val endIndex = if (i == groupNum - 1) studentsList.size else startIndex + groupSize
-                            for (j in startIndex until endIndex) {
-                                groupStudents.add(studentsList[j].id)
-                            }
+                            val groupStudents = baseGrouped[i]
+                            val colorStudents = colorGrouped[i]
+                            val symbolStudents = symbolGrouped[i]
 
                             val randomIcon = groupIcons[Random.nextInt(groupIcons.size)]
 
                             val newGroup = Group(
                                 id = "",
                                 groupNumber = i + 1,
-                                groupSize = groupStudents.size,  // Use actual size to handle uneven
+                                groupSize = groupStudents.size,
                                 groupStudent = groupStudents
                             )
 
                             val newColorGroup = ColorGroup(
                                 id = "",
                                 groupColor = String.format("#%06X", Random.nextInt(0xFFFFFF + 1)),
-                                groupStudent = groupStudents
+                                groupStudent = colorStudents
                             )
 
                             val newSymbolGroup = SymbolGroup(
                                 id = "",
                                 groupImageResId = randomIcon,
-                                groupStudent = groupStudents
+                                groupStudent = symbolStudents
                             )
 
                             val newGroupRef = groupsRef.push()
@@ -199,10 +219,18 @@ class GroupsScreenActivity : AppCompatActivity() {
                         // Update classroom with new groups map
                         classroomRef.child("classroomGroups").setValue(existingGroups)
                             .addOnSuccessListener {
-                                Toast.makeText(this, "$groupNum groups created successfully", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    "$groupNum groups created successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(this, "Failed to update classroom: ${e.message}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    "Failed to update classroom: ${e.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                     }
                 }
