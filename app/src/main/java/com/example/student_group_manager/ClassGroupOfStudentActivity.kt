@@ -72,14 +72,12 @@ class ClassGroupOfStudentActivity: AppCompatActivity() {
                     if (group.groupStudent.contains(studentId)) {  // 👈 Use contains() for List
                         applyGroupUI(group)
                         Log.d("ClassGroupOfStudentActivity", "Found student in group ${group.groupNumber}")
-                        Toast.makeText(this@ClassGroupOfStudentActivity, "Found the student in a group", Toast.LENGTH_SHORT).show()
                         found = true
                         break
                     }
                 }
                 if (!found) {  // 👈 Moved "not found" outside the loop
                     Log.d("ClassGroupOfStudentActivity", "The student was not found in any group")
-                    Toast.makeText(this@ClassGroupOfStudentActivity, "The student was not found in any group", Toast.LENGTH_SHORT).show()
                     // Optional: Reset UI to defaults if needed
                     val rootLayout = findViewById<View>(R.id.rootLayout)
                     rootLayout.setBackgroundColor(Color.WHITE)
