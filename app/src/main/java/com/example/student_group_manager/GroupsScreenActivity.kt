@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -92,12 +94,15 @@ class GroupsScreenActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Show dialog to input group_num
-            val input = android.widget.EditText(this)
-            input.inputType = android.text.InputType.TYPE_CLASS_NUMBER
+            // Inflate custom layout
+            val customView = layoutInflater.inflate(R.layout.dialog_group_input, null)
+            val input = customView.findViewById<EditText>(R.id.edit_group_num)
+            val toggle1 = customView.findViewById<ToggleButton>(R.id.toggle1)
+            val toggle2 = customView.findViewById<ToggleButton>(R.id.toggle2)
+
             AlertDialog.Builder(this)
                 .setTitle("Enter Number of Groups")
-                .setView(input)
+                .setView(customView)  // Use the custom view instead of just the EditText
                 .setPositiveButton("OK") { _, _ ->
                     val groupNumStr = input.text.toString()
                     if (groupNumStr.isEmpty()) {
@@ -105,14 +110,31 @@ class GroupsScreenActivity : AppCompatActivity() {
                         return@setPositiveButton
                     }
                     val groupNum = groupNumStr.toIntOrNull()
-                    if (groupNum == null || groupNum <= 0 || studentsList.size % groupNum != 0) {
+                    if (groupNum == null || groupNum <= 0) {
+                        Toast.makeText(this, "Group number must be positive", Toast.LENGTH_SHORT).show()
+                        return@setPositiveButton
+                    }
+
+                    // Access toggle states here
+                    val isToggle1Enabled = toggle1.isChecked
+                    val isToggle2Enabled = toggle2.isChecked
+
+                    // Example: Conditionally shuffle based on toggle1
+                    if (isToggle1Enabled) {
+                        studentsList.shuffle()
+                    } else {
+                        // Optionally sort or handle differently, e.g., by name
+                        studentsList.sortBy { it.name }  // Assuming Student has a 'name' property
+                    }
+
+                    // Example: Allow uneven groups if toggle2 is enabled
+                    if (!isToggle2Enabled && studentsList.size % groupNum != 0) {
                         Toast.makeText(this, "Group number must divide total students (${studentsList.size}) evenly", Toast.LENGTH_SHORT).show()
                         return@setPositiveButton
                     }
 
-                    // Randomly shuffle students and divide into groups of equal size
-                    studentsList.shuffle()
-                    val groupSize = studentsList.size / groupNum
+                    // Proceed with group creation (rest of your code remains the same)
+                    val groupSize = studentsList.size / groupNum  // This may be uneven if toggle2 allows it
                     val classroomRef = database.getReference("teachers").child(uid).child("subjects").child(subjectId).child("subjectClassrooms").child(classroomId)
                     classroomRef.get().addOnSuccessListener { classroomSnapshot ->
                         val classroom = classroomSnapshot.getValue(Classroom::class.java) ?: return@addOnSuccessListener
@@ -128,12 +150,11 @@ class GroupsScreenActivity : AppCompatActivity() {
                         )
 
                         for (i in 0 until groupNum) {
-
-                            val groupStudents = mutableListOf<String>()  // 👈 Changed to MutableList<String>
-
-                            for (j in 0 until groupSize) {
-                                val studentIndex = i * groupSize + j
-                                groupStudents.add(studentsList[studentIndex].id)  // 👈 Add directly to list
+                            val groupStudents = mutableListOf<String>()
+                            val startIndex = i * groupSize
+                            val endIndex = if (i == groupNum - 1) studentsList.size else startIndex + groupSize
+                            for (j in startIndex until endIndex) {
+                                groupStudents.add(studentsList[j].id)
                             }
 
                             val randomIcon = groupIcons[Random.nextInt(groupIcons.size)]
@@ -141,7 +162,7 @@ class GroupsScreenActivity : AppCompatActivity() {
                             val newGroup = Group(
                                 id = "",
                                 groupNumber = i + 1,
-                                groupSize = groupSize,
+                                groupSize = groupStudents.size,  // Use actual size to handle uneven
                                 groupColor = String.format("#%06X", Random.nextInt(0xFFFFFF + 1)),
                                 groupStudent = groupStudents,
                                 groupImageResId = randomIcon
@@ -151,7 +172,6 @@ class GroupsScreenActivity : AppCompatActivity() {
                             newGroup.id = newGroupRef.key ?: continue
                             newGroupRef.setValue(newGroup)
                         }
-
 
                         // Update classroom with new groups map
                         classroomRef.child("classroomGroups").setValue(existingGroups)
