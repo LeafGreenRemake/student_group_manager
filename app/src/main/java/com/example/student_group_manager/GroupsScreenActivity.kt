@@ -35,14 +35,9 @@ class GroupsScreenActivity : AppCompatActivity() {
 
         val logoutButton: Button = findViewById(R.id.logout_button)
         val addButton: Button = findViewById(R.id.add_button)
+        val resetButton: Button = findViewById(R.id.reset_button)
         auth = Firebase.auth
         val currentUser = auth.currentUser
-
-        logoutButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            975
-        }
 
         val database = Firebase.database
         val uid = currentUser?.uid ?: return
@@ -59,6 +54,60 @@ class GroupsScreenActivity : AppCompatActivity() {
             finish()
             return
         }
+
+        val classroomRef = database.getReference("teachers").child(uid).child("subjects")
+            .child(subjectId).child("subjectClassrooms").child(classroomId)
+
+        logoutButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            // Note: The '975' line seems like a typo; remove if not needed
+        }
+
+        resetButton.setOnClickListener {
+            // Show confirmation dialog to avoid accidental reset
+            AlertDialog.Builder(this)
+                .setMessage("האם אתם בטוחים שאתם רוצים למחוק את כל הקבוצות?")
+                .setPositiveButton("Yes") { _, _ ->
+                    // Delete the groups
+                    val groupsRef = classroomRef.child("groups")
+                    val colorGroupsRef = classroomRef.child("colorGroups")
+                    val symbolGroupsRef = classroomRef.child("symbolGroups")
+
+                    // Optionally clear the classroomGroups map (if it's related; adjust if not needed)
+                    classroomRef.child("classroomGroups").setValue(emptyMap<String, Any>())
+                        .addOnFailureListener { e ->
+                            Log.e("GroupsScreenActivity", "Failed to clear classroomGroups: ${e.message}")
+                        }
+
+                    groupsRef.removeValue()
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Groups deleted successfully", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Failed to delete groups: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+
+                    colorGroupsRef.removeValue()
+                        .addOnSuccessListener {
+                            // Optional: Additional toast if needed
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Failed to delete color groups: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+
+                    symbolGroupsRef.removeValue()
+                        .addOnSuccessListener {
+                            // Optional: Additional toast if needed
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Failed to delete symbol groups: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+                .setNegativeButton("No", null)
+                .show()
+        }
+
 
         // Load students (similar to StudentsScreenActivity)
         val studentsRef =
