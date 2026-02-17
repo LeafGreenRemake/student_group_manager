@@ -1,5 +1,6 @@
 Student Manager Group - an application to create randomized student groups.
-
+<br/>
+<br/>
 
 **High-level explanation of the app:**
 The app allows a teacher to store students by classrooms, and create randomized groups of these students.
@@ -11,11 +12,12 @@ The teacher can control which of these variables are independent.
 Aka, in the default case, each group has unique color, number and symbol.
 If, however, the teacher wants to create two sets of groups; by number and by color, then each student belongs to two groups, one denoted by number and the other by color.
 <br/>
+<br/>
 
 Below is an explanation of how teachers and students can use the app.
 <br/>
 <br/>
-
+<br/>
 
 
 **Teacher-side:**
