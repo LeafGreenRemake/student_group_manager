@@ -14,6 +14,7 @@ If, however, the teacher wants to create two sets of groups; by number and by co
 
 Below is an explanation of how teachers and students can use the app.
 <br/>
+<br/>
 
 
 
