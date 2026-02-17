@@ -21,3 +21,12 @@ Below is an explanation of how teachers and students can use the app.
 
 
 **Teacher-side:**
+A teacher, upon first use of the app, needs to sign-up.
+Signing-up requires legal 
+
+<br/>
+<br/>
+<br/>
+
+
+**Student-side:**
