@@ -1,6 +1,7 @@
 Student Manager Group - an application to create randomized student groups.
 <br/>
 <br/>
+<br/>
 
 **High-level explanation of the app:**
 <br/>
