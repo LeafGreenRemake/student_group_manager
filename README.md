@@ -211,7 +211,19 @@ And here is an example of how the group screen looks when groups were created;
 <br/>
 
 
+An example how groups screens of 4 different students look like, in the default case, where each group has unique number, color and symbol;
 
-<img width="2030" height="1397" alt="image" src="https://github.com/user-attachments/assets/d9970da9-bff9-483c-9c16-80c4717db8ad" />
+<br/>
+<br/>
+<br/>
+
+<img width="2608" height="1565" alt="image" src="https://github.com/user-attachments/assets/530e287e-ee2a-4883-8e2e-ac9d36b583cc" />
+<br/>
+<br/>
+<br/>
+
+
+
+
 
 
