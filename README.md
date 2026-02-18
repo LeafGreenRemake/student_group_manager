@@ -39,7 +39,8 @@ A toggle button allows a user to pick between signing up as a student or as a te
 After a successful sign-up, the teacher will be stored in the app's database, which is a firebase real-time database. Thus, usage of the app requires internet connection.
 The user's details will be stored in the app, and enable automatic log-in, until the user will decide to log-out.
 <br/>
-<img width="683" height="1405" alt="image" src="https://github.com/user-attachments/assets/60b7a301-f6a9-4917-9e1e-1ec654046630" />
+<img width="1858" height="1389" alt="image" src="https://github.com/user-attachments/assets/4ee39b33-e525-49a2-9340-0bfa2a94c616" />
+
 
 <br/>
 
