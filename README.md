@@ -27,6 +27,9 @@ A teacher, upon first use of the app, needs to sign-up.
 <br/>
 <br/>
 <br/>
+<img width="1895" height="1393" alt="image" src="https://github.com/user-attachments/assets/a0400ec7-8ccd-4cc4-83f7-adc930ac2e31" />
+<br/>
+<br/>
 <img width="1856" height="1398" alt="image" src="https://github.com/user-attachments/assets/27791251-75e8-4310-aba6-1bec2f6f8191" />
 <br/>
 <br/>
@@ -49,7 +52,15 @@ The user's details will be stored in the app, and enable automatic log-in, until
 <br/>
 <br/>
 <br/>
+<img width="1890" height="1399" alt="image" src="https://github.com/user-attachments/assets/614e6497-fc99-44e6-8ddd-ec8da4d1a1e8" />
+
+<br/>
+<br/>
 <img width="1858" height="1389" alt="image" src="https://github.com/user-attachments/assets/4ee39b33-e525-49a2-9340-0bfa2a94c616" />
+<br/>
+<br/>
+<img width="1878" height="1400" alt="image" src="https://github.com/user-attachments/assets/d4f93d64-312f-44ec-8abd-15e7563765aa" />
+
 <br/>
 <br/>
 <br/>
