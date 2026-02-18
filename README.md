@@ -148,6 +148,10 @@ When pressing 'delete groups', each group will be deleted and thus a new set of 
 <br/>
 <br/>
 <br/>
+<br/>
+<br/>
+<br/>
+
 
 
 
@@ -182,7 +186,7 @@ A new classroom can be added using the '+' button and typing the code given by t
 <br/>
 <br/>
 
-When no groups exist, this is the default group screen each student has`
+When no groups exist, this is the default group screen each student has;
 
 <br/>
 <br/>
@@ -193,6 +197,20 @@ When no groups exist, this is the default group screen each student has`
 <br/>
 <br/>
 <br/>
+
+And here is an example of how the group screen looks when groups were created;
+
+<br/>
+<br/>
+<br/>
+
+<img width="2035" height="1405" alt="image" src="https://github.com/user-attachments/assets/a932645d-76d7-493b-b784-532f4c9360b7" />
+
+<br/>
+<br/>
+<br/>
+
+
 
 <img width="2030" height="1397" alt="image" src="https://github.com/user-attachments/assets/d9970da9-bff9-483c-9c16-80c4717db8ad" />
 
