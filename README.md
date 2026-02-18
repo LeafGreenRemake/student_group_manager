@@ -35,6 +35,7 @@ A teacher, upon first use of the app, needs to sign-up.
 <br/>
 <br/>
 <br/>
+<br/>
 Signing-up requires legal email address, a password and chosen nickname (can be written in either English or Hebrew)
 A toggle button allows a user to pick between signing up as a student or as a teacher.
 <br/>
@@ -64,6 +65,7 @@ A teacher can create subjects (such as math, physics, etc) and add tasks and cla
 <br/>
 <br/>
 <br/>
+<br/>
 
 A task is an object with string description, which allows the teacher to keep track of which tasks groups can get.
 
@@ -79,6 +81,7 @@ A task is an object with string description, which allows the teacher to keep tr
 <br/>
 <br/>
 <br/>
+<br/>
 
 
 A classroom contains name and a list of student.
@@ -87,6 +90,7 @@ A classroom contains name and a list of student.
 <br/>
 <br/>
 <img width="1739" height="1407" alt="image" src="https://github.com/user-attachments/assets/a998ced1-d26a-45b1-969c-dd898294e16c" />
+<br/>
 <br/>
 <br/>
 <br/>
@@ -105,6 +109,7 @@ In order to add students, the teacher needs to create a classroom code. Students
 <br/>
 <img width="1822" height="1544" alt="image" src="https://github.com/user-attachments/assets/5d25ed6d-3b8e-44cf-bf7a-2902550e1e31" />
 
+<br/>
 <br/>
 <br/>
 <br/>
@@ -128,6 +133,7 @@ When the theacher wants to create a group, they can do so using the '+', and cus
 <br/>
 <br/>
 <br/>
+<br/>
 
 After pressing 'OK', the groups will be automatically visible in the student's screens.
 When pressing 'delete groups', each group will be deleted and thus a new set of randomized groups can be created again.
@@ -139,6 +145,7 @@ When pressing 'delete groups', each group will be deleted and thus a new set of 
 
 
 
+<br/>
 <br/>
 <br/>
 <br/>
@@ -172,6 +179,7 @@ A student signs up to the app in the same way as a teacher, exept for toggling t
 <br/>
 <br/>
 <br/>
+<br/>
 
 After the student logs in, they will see the classrooms they signed into (using a code)
 A new classroom can be added using the '+' button and typing the code given by the classroom's teacher.
@@ -191,6 +199,7 @@ A new classroom can be added using the '+' button and typing the code given by t
 <br/>
 <br/>
 <br/>
+<br/>
 
 When no groups exist, this is the default group screen each student has;
 
@@ -200,6 +209,7 @@ When no groups exist, this is the default group screen each student has;
 
 <img width="2037" height="1403" alt="image" src="https://github.com/user-attachments/assets/7c274752-166e-4d73-9057-e7722b34604d" />
 
+<br/>
 <br/>
 <br/>
 <br/>
@@ -217,6 +227,7 @@ And here is an example of how the group screen looks when groups were created;
 <br/>
 <br/>
 <br/>
+<br/>
 
 
 An example of how groups screens of 4 different students look like, in the default case, where each group has unique number, color and symbol;
@@ -226,6 +237,7 @@ An example of how groups screens of 4 different students look like, in the defau
 <br/>
 
 <img width="2608" height="1565" alt="image" src="https://github.com/user-attachments/assets/530e287e-ee2a-4883-8e2e-ac9d36b583cc" />
+<br/>
 <br/>
 <br/>
 <br/>
@@ -242,6 +254,7 @@ Aka, each student has 2 groups: a group denoted by number and symbol, and anothe
 <br/>
 <br/>
 <br/>
+<br/>
 
 
 Here is a similar example, but in the case where symbols are independent of number and color;
@@ -251,6 +264,7 @@ Here is a similar example, but in the case where symbols are independent of numb
 <br/>
 <img width="2594" height="1576" alt="image" src="https://github.com/user-attachments/assets/eae49f55-01a2-405a-acc5-f0b57663f199" />
 
+<br/>
 <br/>
 <br/>
 <br/>
