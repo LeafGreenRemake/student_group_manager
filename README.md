@@ -255,3 +255,15 @@ Here is a similar example, but in the case where symbols are independent of numb
 <br/>
 <br/>
 <br/>
+
+
+An example of the last case, where number, color and symbol are independent.
+Aka, each student has theree groups, one denoted by number, other by color and another by symbol;
+
+<br/>
+<br/>
+<br/>
+
+![WhatsApp Image 2026-02-18 at 14 01 48](https://github.com/user-attachments/assets/91d7dfac-3a4d-4820-bea5-a8bc635db83d)
+
+
