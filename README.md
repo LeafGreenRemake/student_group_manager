@@ -115,11 +115,21 @@ When the theacher wants to create a group, they can do so using the '+', and cus
 
 <img width="2032" height="1404" alt="image" src="https://github.com/user-attachments/assets/3b25951a-6338-438e-9d0f-b3c64e19548a" />
 
+<br/>
+<br/>
+
+<img width="2039" height="1408" alt="image" src="https://github.com/user-attachments/assets/fe7a3a9a-3264-4c21-9fab-311f9b1ec061" />
 
 
+<br/>
+<br/>
+<br/>
+
+After pressing 'OK', the groups will be automatically visible in the student's screens.
 <br/>
 <br/>
 <br/>
 
 
 **Student-side:**
+
