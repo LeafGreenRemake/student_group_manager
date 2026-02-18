@@ -80,6 +80,16 @@ A task is an object with string description, which allows the teacher to keep tr
 
 
 A classroom contains name and a list of student.
+
+<br/>
+<br/>
+<br/>
+<img width="1739" height="1407" alt="image" src="https://github.com/user-attachments/assets/a998ced1-d26a-45b1-969c-dd898294e16c" />
+<br/>
+<br/>
+<br/>
+
+
 In order to add students, the teacher needs to create a classroom code. Students can enter the code to their own app and be stored in the classroom. Each student that signs to the classroom shows up in the teacher's classroom screen in the nickname they chose for themeselves.
 (more on the student's side later)
 
@@ -97,7 +107,7 @@ In order to add students, the teacher needs to create a classroom code. Students
 <br/>
 <br/>
 
-When 
+When the theacher wants to create a group, they can do so using the '+', and customize the group variables as stated before.
 
 
 
