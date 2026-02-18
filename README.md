@@ -214,6 +214,7 @@ When no groups exist, this is the default group screen each student has;
 <br/>
 <br/>
 <br/>
+<br/>
 
 And here is an example of how the group screen looks when groups were created;
 
@@ -222,6 +223,7 @@ And here is an example of how the group screen looks when groups were created;
 
 <img width="2035" height="1405" alt="image" src="https://github.com/user-attachments/assets/a932645d-76d7-493b-b784-532f4c9360b7" />
 
+<br/>
 <br/>
 <br/>
 <br/>
@@ -242,6 +244,7 @@ An example of how groups screens of 4 different students look like, in the defau
 <br/>
 <br/>
 <br/>
+<br/>
 
 An example of how groups screens of 4 different students look like, in the case where the color variable of a group is independent to number and color.
 Aka, each student has 2 groups: a group denoted by number and symbol, and another group denoted by color:
@@ -249,6 +252,7 @@ Aka, each student has 2 groups: a group denoted by number and symbol, and anothe
 <br/>
 <br/>
 <img width="2605" height="1570" alt="image" src="https://github.com/user-attachments/assets/2023bd42-3efe-426d-a886-d36b7af5f025" />
+<br/>
 <br/>
 <br/>
 <br/>
@@ -263,6 +267,7 @@ Here is a similar example, but in the case where symbols are independent of numb
 <br/>
 <img width="2594" height="1576" alt="image" src="https://github.com/user-attachments/assets/eae49f55-01a2-405a-acc5-f0b57663f199" />
 
+<br/>
 <br/>
 <br/>
 <br/>
