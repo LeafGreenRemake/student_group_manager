@@ -39,10 +39,6 @@ A toggle button allows a user to pick between signing up as a student or as a te
 <br/>
 <br/>
 <br/>
-<img width="1888" height="1411" alt="image" src="https://github.com/user-attachments/assets/70591369-2f08-4a8f-b7da-041a3edfc105" />
-<br/>
-<br/>
-<br/>
 
 
 
@@ -54,9 +50,6 @@ The user's details will be stored in the app, and enable automatic log-in, until
 <br/>
 <img width="1890" height="1399" alt="image" src="https://github.com/user-attachments/assets/614e6497-fc99-44e6-8ddd-ec8da4d1a1e8" />
 
-<br/>
-<br/>
-<img width="1858" height="1389" alt="image" src="https://github.com/user-attachments/assets/4ee39b33-e525-49a2-9340-0bfa2a94c616" />
 <br/>
 <br/>
 <img width="1878" height="1400" alt="image" src="https://github.com/user-attachments/assets/d4f93d64-312f-44ec-8abd-15e7563765aa" />
