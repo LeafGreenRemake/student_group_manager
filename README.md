@@ -45,6 +45,11 @@ A toggle button allows a user to pick between signing up as a student or as a te
 
 After a successful sign-up, the teacher will be stored in the app's database, which is a firebase real-time database. Thus, usage of the app requires internet connection.
 The user's details will be stored in the app, and enable automatic log-in, until the user will decide to log-out.
+
+
+
+
+A teacher can create subjects (such as math, physics, etc) and add tasks and classrooms to each subject.
 <br/>
 <br/>
 <br/>
@@ -58,12 +63,41 @@ The user's details will be stored in the app, and enable automatic log-in, until
 <br/>
 <br/>
 
-
-A teacher can create subjects (such as math, physics, etc) and add tasks and classrooms to each subject.
 A task is an object with string description, which allows the teacher to keep track of which tasks groups can get.
+
+<br/>
+<br/>
+<br/>
+<img width="1730" height="1407" alt="image" src="https://github.com/user-attachments/assets/5c048878-f70e-4143-8dfd-c53110c34f2a" />
+<br/>
+<br/>
+<img width="1724" height="1396" alt="image" src="https://github.com/user-attachments/assets/bba9b68b-5f5f-4a53-922a-49a2836fe086" />
+
+<br/>
+<br/>
+<br/>
+
+
 
 A classroom contains name and a list of student.
 In order to add students, the teacher needs to create a classroom code. Students can enter the code to their own app and be stored in the classroom. Each student that signs to the classroom shows up in the teacher's classroom screen in the nickname they chose for themeselves.
+(more on the student's side later)
+
+<br/>
+<br/>
+<br/>
+<img width="1738" height="1392" alt="image" src="https://github.com/user-attachments/assets/faec8d09-6e7f-4daa-9668-aa06e5b5db63" />
+
+<br/>
+<br/>
+<img width="1822" height="1544" alt="image" src="https://github.com/user-attachments/assets/5d25ed6d-3b8e-44cf-bf7a-2902550e1e31" />
+
+
+<br/>
+<br/>
+<br/>
+
+When 
 
 
 
