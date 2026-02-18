@@ -25,12 +25,16 @@ Below is an explanation of how teachers and students can use the app.
 **Teacher-side:**
 A teacher, upon first use of the app, needs to sign-up.
 <br/>
-<img width="674" height="1406" alt="image" src="https://github.com/user-attachments/assets/6ec95a20-8201-4395-87d8-5c649fdfefbf" />
+<br/>
+<img width="1856" height="1398" alt="image" src="https://github.com/user-attachments/assets/27791251-75e8-4310-aba6-1bec2f6f8191" />
+<br/>
 <br/>
 Signing-up requires legal email address, a password and chosen nickname (can be written in either English or Hebrew)
 A toggle button allows a user to pick between signing up as a student or as a teacher.
 <br/>
+<br/>
 <img width="668" height="1409" alt="image" src="https://github.com/user-attachments/assets/b436a4bf-30ae-4a38-b6c1-31b21b73f561" />
+<br/>
 <br/>
 
 
