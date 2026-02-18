@@ -126,10 +126,66 @@ When the theacher wants to create a group, they can do so using the '+', and cus
 <br/>
 
 After pressing 'OK', the groups will be automatically visible in the student's screens.
+When pressing 'delete groups', each group will be deleted and thus a new set of randomized groups can be created again.
+
+<br/>
+<br/>
+<br/>
+<img width="2025" height="1407" alt="image" src="https://github.com/user-attachments/assets/a41fc492-dc7c-4163-8257-28dddc466615" />
+
+
+
+<br/>
+<br/>
+<br/>
 <br/>
 <br/>
 <br/>
 
 
 **Student-side:**
+A student signs up to the app in the same way as a teacher, exept for toggling to 'student' in the sign-up toggle button.
+
+<br/>
+<br/>
+<br/>
+
+<img width="2040" height="1393" alt="image" src="https://github.com/user-attachments/assets/d00334e0-175c-4461-95bb-334c16556a83" />
+
+<br/>
+<br/>
+<br/>
+
+After the student logs in, they will see the classrooms they signed into (using a code)
+A new classroom can be added using the '+' button and typing the code given by the classroom's teacher.
+
+<br/>
+<br/>
+<br/>
+
+<img width="2019" height="1395" alt="image" src="https://github.com/user-attachments/assets/287f28d3-1dcb-4238-b35f-f1d166e76cdb" />
+
+<br/>
+<br/>
+
+<img width="2039" height="1409" alt="image" src="https://github.com/user-attachments/assets/ec769985-e7e1-4c11-a41b-591deb29dc53" />
+
+<br/>
+<br/>
+<br/>
+
+When no groups exist, this is the default group screen each student has`
+
+<br/>
+<br/>
+<br/>
+
+<img width="2037" height="1403" alt="image" src="https://github.com/user-attachments/assets/7c274752-166e-4d73-9057-e7722b34604d" />
+
+<br/>
+<br/>
+<br/>
+
+<img width="2030" height="1397" alt="image" src="https://github.com/user-attachments/assets/d9970da9-bff9-483c-9c16-80c4717db8ad" />
+
 
