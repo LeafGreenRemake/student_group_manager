@@ -109,6 +109,12 @@ In order to add students, the teacher needs to create a classroom code. Students
 
 When the theacher wants to create a group, they can do so using the '+', and customize the group variables as stated before.
 
+<br/>
+<br/>
+<br/>
+
+<img width="2032" height="1404" alt="image" src="https://github.com/user-attachments/assets/3b25951a-6338-438e-9d0f-b3c64e19548a" />
+
 
 
 <br/>
