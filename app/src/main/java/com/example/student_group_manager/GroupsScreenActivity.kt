@@ -178,8 +178,8 @@ class GroupsScreenActivity : AppCompatActivity() {
 
 
                     val groupNum = groupNumStr.toIntOrNull()
-                    val groupCol = groupNumStr.toIntOrNull()
-                    val groupSym = groupNumStr.toIntOrNull()
+                    val groupCol = groupColStr.toIntOrNull()
+                    val groupSym = groupSymStr.toIntOrNull()
 
                     if (groupNum == null || groupNum <= 0 || groupCol == null || groupCol <= 0 || groupSym == null || groupSym <= 0) {
                         Toast.makeText(this, "כל המספרים צריכים להיות חיוביים", Toast.LENGTH_SHORT)
@@ -227,8 +227,17 @@ class GroupsScreenActivity : AppCompatActivity() {
                             R.drawable.outline_cruelty_free_24,
                             R.drawable.outline_dark_mode_24,
                             R.drawable.outline_deceased_24,
-                            R.drawable.outline_light_mode_24
+                            R.drawable.outline_light_mode_24,
+                            R.drawable.outline_diamond_24,
+                            R.drawable.outline_crown_24,
+                            R.drawable.outline_emoji_nature_24,
+                            R.drawable.outline_mode_cool_24,
+                            R.drawable.outline_rocket_launch_24,
+                            R.drawable.outline_electric_bolt_24,
+                            R.drawable.outline_auto_awesome_24,
+                            R.drawable.outline_chess_knight_24
                         )
+
 
                         for (i in 0 until groupNum) {
                             val groupStudents = baseGrouped[i]
@@ -268,6 +277,39 @@ class GroupsScreenActivity : AppCompatActivity() {
                             newSymbolGroup.id = newSymbolGroupRef.key ?: continue
                             newSymbolGroupRef.setValue(newSymbolGroup)
                         }
+
+
+                        for (i in 0 until groupCol) {
+                            val colorStudents = colorGrouped[i]
+                            val randomIcon = groupIcons[Random.nextInt(groupIcons.size)]
+
+                            val newColorGroup = ColorGroup(
+                                id = "",
+                                groupColor = String.format("#%06X", Random.nextInt(0xFFFFFF + 1)),
+                                groupStudent = colorStudents
+                            )
+
+                            val newColorGroupRef = colorGroupsRef.push()
+                            newColorGroup.id = newColorGroupRef.key ?: continue
+                            newColorGroupRef.setValue(newColorGroup)
+                        }
+
+
+                        for (i in 0 until groupSym) {
+                            val symbolStudents = symbolGrouped[i]
+                            val randomIcon = groupIcons[Random.nextInt(groupIcons.size)]
+
+                            val newSymbolGroup = SymbolGroup(
+                                id = "",
+                                groupImageResId = randomIcon,
+                                groupStudent = symbolStudents
+                            )
+
+                            val newSymbolGroupRef = symbolGroupsRef.push()
+                            newSymbolGroup.id = newSymbolGroupRef.key ?: continue
+                            newSymbolGroupRef.setValue(newSymbolGroup)
+                        }
+
 
                         // Update classroom with new groups map
                         classroomRef.child("classroomGroups").setValue(existingGroups)
