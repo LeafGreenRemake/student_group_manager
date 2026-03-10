@@ -156,30 +156,36 @@ class GroupsScreenActivity : AppCompatActivity() {
             }
 
             // Inflate custom layout
-            val customView = layoutInflater.inflate(R.layout.dialog_group_input, null)
+            val customView = layoutInflater.inflate(R.layout.dialog_group_input_v2, null)
             val input = customView.findViewById<EditText>(R.id.edit_group_num)
-            val toggle1 = customView.findViewById<ToggleButton>(R.id.toggle1)
-            val toggle2 = customView.findViewById<ToggleButton>(R.id.toggle2)
+            val input_colors = customView.findViewById<EditText>(R.id.edit_group_colors)
+            val input_symbols = customView.findViewById<EditText>(R.id.edit_group_symbols)
+            //val toggle1 = customView.findViewById<ToggleButton>(R.id.toggle1)
+            //val toggle2 = customView.findViewById<ToggleButton>(R.id.toggle2)
 
             AlertDialog.Builder(this)
                 .setTitle("אפשרויות יצירת קבוצות")
                 .setView(customView)  // Use the custom view instead of just the EditText
                 .setPositiveButton("OK") { _, _ ->
                     val groupNumStr = input.text.toString()
-                    if (groupNumStr.isEmpty()) {
+                    val groupColStr = input_colors.text.toString()
+                    val groupSymStr = input_symbols.text.toString()
+
+                    if (groupNumStr.isEmpty() || groupColStr.isEmpty() || groupSymStr.isEmpty()) {
                         Toast.makeText(this, "Invalid input", Toast.LENGTH_SHORT).show()
                         return@setPositiveButton
                     }
+
+
                     val groupNum = groupNumStr.toIntOrNull()
-                    if (groupNum == null || groupNum <= 0) {
-                        Toast.makeText(this, "Group number must be positive", Toast.LENGTH_SHORT)
+                    val groupCol = groupNumStr.toIntOrNull()
+                    val groupSym = groupNumStr.toIntOrNull()
+
+                    if (groupNum == null || groupNum <= 0 || groupCol == null || groupCol <= 0 || groupSym == null || groupSym <= 0) {
+                        Toast.makeText(this, "כל המספרים צריכים להיות חיוביים", Toast.LENGTH_SHORT)
                             .show()
                         return@setPositiveButton
                     }
-
-                    // Access toggle states here
-                    val isToggle1Enabled = toggle1.isChecked
-                    val isToggle2Enabled = toggle2.isChecked
 
                     // Helper function to create grouped student IDs
                     fun createGroupedStudents(shuffle: Boolean): List<List<String>> {
@@ -198,12 +204,10 @@ class GroupsScreenActivity : AppCompatActivity() {
                     val baseGrouped = createGroupedStudents(shuffle = true)
 
                     // Compute color grouping: different shuffle if toggle1 checked, else reuse base
-                    val colorGrouped =
-                        if (isToggle1Enabled) createGroupedStudents(shuffle = true) else baseGrouped
+                    val colorGrouped = createGroupedStudents(shuffle = true)
 
                     // Compute symbol grouping: different shuffle if toggle2 checked, else reuse base
-                    val symbolGrouped =
-                        if (isToggle2Enabled) createGroupedStudents(shuffle = true) else baseGrouped
+                    val symbolGrouped = createGroupedStudents(shuffle = true)
 
                     // Proceed with group creation
                     val classroomRef =
