@@ -32,7 +32,7 @@ class StudentAdapter(private val students: MutableList<Student>) : RecyclerView.
             AlertDialog.Builder(context)
                 .setMessage("למחוק את התלמיד מהכיתה?")
                 .setPositiveButton("כן") { _, _ ->
-                    
+
                 }
 
                 .setNegativeButton("לא", null)
