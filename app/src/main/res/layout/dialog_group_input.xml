@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/edit_group_num"
+        android:layout_width="317dp"
+        android:layout_height="59dp"
+        android:hint="מספר קבוצות:"
+        android:inputType="number"
+        android:textDirection="rtl" />
+
+    <!-- Default to checked/on -->
+
+    <ToggleButton
+        android:id="@+id/toggle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="8dp"
+        android:checked="false"
+        android:textOff="ללא חלוקת קבוצות לפי צבעים"
+        android:textOn="חלוקת קבוצות לפי צבעים" />
+
+    <ToggleButton
+        android:id="@+id/toggle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="8dp"
+        android:checked="false"
+        android:textOff="ללא חלוקת קבוצות לפי סמלים"
+        android:textOn="חלוקת קבוצות לפי סמלים" />  <!-- Default to unchecked/off -->
+
+</LinearLayout>

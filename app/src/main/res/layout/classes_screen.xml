@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="612dp"
+        android:layout_height="755dp"
         android:layout_marginTop="120dp">
 
         <TextView
@@ -26,7 +26,7 @@
             android:id="@+id/textView5"
             android:layout_width="182dp"
             android:layout_height="28dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="75dp"
             android:layout_marginEnd="12dp"
             android:text="הכיתות שלך:"
             android:textSize="16sp"
@@ -48,8 +48,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="406dp"
-            android:layout_height="402dp"
+            android:layout_width="389dp"
+            android:layout_height="533dp"
             android:layout_marginTop="28dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -58,7 +58,7 @@
             android:id="@+id/logout_button"
             android:layout_width="63dp"
             android:layout_height="57dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:text="יציאה"
             android:textSize="15sp"
@@ -70,8 +70,8 @@
             android:id="@+id/add_button"
             android:layout_width="63dp"
             android:layout_height="57dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="88dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="84dp"
             android:text="+"
             android:textSize="24sp"
             android:textStyle="bold"

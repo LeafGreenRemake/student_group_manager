@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import kotlin.random.Random
+import android.os.Handler
+import android.os.Looper
 
 private lateinit var auth: FirebaseAuth
 private var studentsList = mutableListOf<Student>()
@@ -30,12 +34,14 @@ class StudentsScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.students_screen)
+        supportActionBar?.hide()
 
         val logoutButton: Button = findViewById(R.id.logout_button)
         val addButton: Button = findViewById(R.id.add_button)
         auth = Firebase.auth
         val currentUser = auth.currentUser
         val nameEditText: EditText = findViewById(R.id.teacher_name)
+        val generatedCode: TextView = findViewById(R.id.join_class_code)
 
         logoutButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -83,26 +89,85 @@ class StudentsScreenActivity : AppCompatActivity() {
         }
 
         addButton.setOnClickListener {
-            AddStudentFragment.newInstance(subjectId, classroomId).show(supportFragmentManager, "add_student_dialog")
+            generateJoinCode(subjectId, classroomId, generatedCode)
         }
 
-        val studentsRef = database.getReference("teachers").child(uid).child("subjects").child(subjectId).child("subjectClassrooms").child(classroomId).child("classroomStudents")
+        val studentsRef = database.getReference("teachers").child(uid).child("subjects").child(subjectId).child("subjectClassrooms").child(classroomId).child("students")
         studentsRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                Log.d("StudentsScreenActivity", "Snapshot received with children count: ${snapshot.childrenCount}")
                 studentsList.clear()
-                for (childSnapshot in snapshot.children) {
-                    val student = childSnapshot.getValue(Student::class.java)
-                    student?.let {
-                        it.id = childSnapshot.key ?: ""
-                        studentsList.add(it)
-                    }
-                }
                 adapter.notifyDataSetChanged()
+                if (!snapshot.exists()) {
+                    Log.d("StudentsScreenActivity", "No students found for classroom")
+                    return
+                }
+                for (childSnapshot in snapshot.children) {
+                    val studentId = childSnapshot.key ?: continue
+                    Log.d("StudentsScreenActivity", "Fetching student ID: $studentId")
+                    database.getReference("students").child(studentId).get()
+                        .addOnSuccessListener { studentSnapshot ->
+                            val student = studentSnapshot.getValue(Student::class.java)
+                            if (student != null) {
+                                Log.d("StudentsScreenActivity", "Fetched student: ${student.name}")
+                                student.id = studentId
+                                studentsList.add(student)
+                                adapter.notifyItemInserted(studentsList.size - 1)
+                            } else {
+                                Log.e("StudentsScreenActivity", "Student data null for ID: $studentId")
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("StudentsScreenActivity", "Failed to fetch student $studentId: ${e.message}")
+                        }
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.e("StudentsScreenActivity", "Students fetch error: ${error.message}")
                 Toast.makeText(this@StudentsScreenActivity, "Failed to load students", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun generateJoinCode(subjectId: String, classroomId: String, generatedCode: TextView) {
+        val database = Firebase.database
+        val joinCodesRef = database.getReference("join_codes")
+
+        var code = Random.nextInt(1000000, 9999999).toString()  // 7-digit random
+
+        // Check if code exists; if yes, regenerate (recursive, but low collision risk)
+        joinCodesRef.child(code).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    // Code taken, regenerate
+                    generateJoinCode(subjectId, classroomId, generatedCode)
+                } else {
+                    // Save code -> classroom path
+                    val classroomPath = "teachers/${auth.uid}/subjects/$subjectId/subjectClassrooms/$classroomId"
+                    joinCodesRef.child(code).setValue(classroomPath)
+                        .addOnSuccessListener {
+                            generatedCode.text = "הקוד להצטרפות לכיתה הינו; $code"
+                            Toast.makeText(this@StudentsScreenActivity, "Join code generated: $code", Toast.LENGTH_LONG).show()
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                joinCodesRef.child(code).removeValue()
+                                    .addOnSuccessListener {
+                                        Log.d("StudentsScreenActivity", "Join code $code auto-removed after 10 minutes")
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Log.e("StudentsScreenActivity", "Failed to auto-remove code: ${e.message}")
+                                    }
+                            }, 10 * 60 * 1000)
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this@StudentsScreenActivity, "Failed to generate code: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@StudentsScreenActivity, "Error checking code: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }

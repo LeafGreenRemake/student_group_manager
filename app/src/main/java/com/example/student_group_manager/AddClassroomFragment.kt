@@ -25,6 +25,7 @@ class AddClassroomFragment : DialogFragment() {
                 .setPositiveButton("Save") {_, _ ->}
                 .setNegativeButton("Cancel") {dialog, _ -> dialog.cancel() }
 
+
                     
 
                 .setPositiveButton("Save") { dialog, id ->
@@ -64,7 +65,7 @@ class AddClassroomFragment : DialogFragment() {
             return
         }
 
-        val classroom = Classroom(key, name, mapOf(), mapOf())
+        val classroom = Classroom(key, uid, subjectId, name, mapOf(), mapOf())
 
         newClassroomRef.setValue(classroom)
             .addOnSuccessListener {

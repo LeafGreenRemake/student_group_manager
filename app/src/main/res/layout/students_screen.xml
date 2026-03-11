@@ -77,5 +77,15 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+        <TextView
+            android:id="@+id/join_class_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/add_button"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

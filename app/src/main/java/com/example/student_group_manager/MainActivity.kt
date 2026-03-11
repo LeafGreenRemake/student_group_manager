@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.login_screen)
+        supportActionBar?.hide()
 
         auth = Firebase.auth
 

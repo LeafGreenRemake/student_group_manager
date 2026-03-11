@@ -35,6 +35,7 @@ class ClassroomsAdapter(
         holder.groupsButton.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, GroupsScreenActivity::class.java)
+            intent.putExtra("subject_id", subjectId)
             intent.putExtra("classroom_id", classroom.id)
             intent.putExtra("classroom_name", classroom.name)
             context.startActivity(intent)

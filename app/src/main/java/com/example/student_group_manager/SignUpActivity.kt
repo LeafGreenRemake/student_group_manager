@@ -25,6 +25,7 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.sign_up_screen)
+        supportActionBar?.hide()
 
         val goBackButton: Button = findViewById(R.id.go_back_button)
         val nameEditText: EditText = findViewById(R.id.name_edittext)
@@ -34,7 +35,7 @@ class SignUpActivity : AppCompatActivity() {
         val toggleButton: ToggleButton = findViewById(R.id.toggleButton)
         auth = Firebase.auth
 
-        var is_a_student: Boolean = true
+        var isAStudent: Boolean = true
 
         goBackButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -43,9 +44,9 @@ class SignUpActivity : AppCompatActivity() {
 
         toggleButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                is_a_student = false
+                isAStudent = false
             } else {
-                is_a_student = true
+                isAStudent = true
             }
         }
 
@@ -65,7 +66,7 @@ class SignUpActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val userId = auth.currentUser?.uid
 
-                        if (is_a_student) {
+                        if (isAStudent) {
                             saveStudentToDatabase(userId, name, email)
                         } else {
                             saveTeacherToDatabase(userId, name, email)

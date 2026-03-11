@@ -3,7 +3,7 @@
     <!-- Remove or comment this if fully switching away from Compose -->
     <!-- <style name="Theme.Student_group_manager" parent="android:Theme.Material.Light.NoActionBar" /> -->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here, e.g., primary color -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryDark">@color/purple_700</item>

@@ -31,6 +31,7 @@ class TasksScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.tasks_screen)
+        supportActionBar?.hide()
 
         val logoutButton: Button = findViewById(R.id.logout_button)  // Fixed: Use logout_button, not login_button
         val addButton: Button = findViewById(R.id.add_button)
