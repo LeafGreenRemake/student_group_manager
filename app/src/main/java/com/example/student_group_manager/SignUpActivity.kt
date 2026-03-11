@@ -25,6 +25,7 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.sign_up_screen)
+        supportActionBar?.hide()
 
         val goBackButton: Button = findViewById(R.id.go_back_button)
         val nameEditText: EditText = findViewById(R.id.name_edittext)

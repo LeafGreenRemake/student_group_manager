@@ -32,6 +32,7 @@ class GroupsScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.student_group_screen)
+        supportActionBar?.hide()
 
         val logoutButton: Button = findViewById(R.id.logout_button)
         val addButton: Button = findViewById(R.id.add_button)
@@ -235,7 +236,16 @@ class GroupsScreenActivity : AppCompatActivity() {
                             R.drawable.outline_rocket_launch_24,
                             R.drawable.outline_electric_bolt_24,
                             R.drawable.outline_auto_awesome_24,
-                            R.drawable.outline_chess_knight_24
+                            R.drawable.outline_chess_knight_24,
+                            R.drawable.outline_favorite_24,
+                            R.drawable.outline_eco_24,
+                            R.drawable.outline_hov_24,
+                            R.drawable.outline_nature_24,
+                            R.drawable.outline_cloud_24,
+                            R.drawable.outline_book_2_24,
+                            R.drawable.outline_planet_24,
+                            R.drawable.outline_raven_24,
+                            R.drawable.outline_pets_24
                         )
 
 

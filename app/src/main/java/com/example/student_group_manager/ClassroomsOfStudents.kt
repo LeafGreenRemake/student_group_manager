@@ -31,6 +31,7 @@ class ClassroomsOfStudents : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.classes_screen)
+        supportActionBar?.hide()
 
         val logoutButton: Button = findViewById(R.id.logout_button)
         val addButton: Button = findViewById(R.id.add_button)  // Assume this exists in layout

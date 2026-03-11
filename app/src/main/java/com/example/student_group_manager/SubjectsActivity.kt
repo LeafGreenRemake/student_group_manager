@@ -34,6 +34,7 @@ class SubjectsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.subjects_screen)
+        supportActionBar?.hide()
 
         auth = Firebase.auth
         val currentUser = auth.currentUser

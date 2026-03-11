@@ -38,7 +38,7 @@
             android:id="@+id/textView7"
             android:layout_width="402dp"
             android:layout_height="26dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="95dp"
             android:layout_marginEnd="16dp"
             android:text="קבוצות הכיתה:"
             android:textSize="20sp"

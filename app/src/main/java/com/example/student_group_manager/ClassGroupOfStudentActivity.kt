@@ -33,6 +33,7 @@ class ClassGroupOfStudentActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.class_group_of_student)
         //enableEdgeToEdge()
+        supportActionBar?.hide()
 
         val database = Firebase.database
         auth = Firebase.auth
