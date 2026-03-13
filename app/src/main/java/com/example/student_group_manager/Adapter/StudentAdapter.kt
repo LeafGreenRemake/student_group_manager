@@ -12,10 +12,9 @@ import com.example.student_group_manager.data.Student
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-import android.content.Intent
 import com.google.firebase.database.database
 
-class StudentAdapter(private val students: MutableList<Student>) : RecyclerView.Adapter<StudentAdapter.ViewHolder>() {
+class StudentAdapter(private val students: MutableList<Student>, private val classroomId: String?, private val subjectId: String?) : RecyclerView.Adapter<StudentAdapter.ViewHolder>() {
 
     private lateinit var auth: FirebaseAuth
 
@@ -46,8 +45,16 @@ class StudentAdapter(private val students: MutableList<Student>) : RecyclerView.
             AlertDialog.Builder(context)
                 .setMessage("למחוק את התלמיד מהכיתה?")
                 .setPositiveButton("כן") { _, _ ->
-                    val studentRef = database.getReference("students").child(studentId)
-                    studentRef.removeValue()
+                    val classroomOfStudentRef =
+                        classroomId?.let { pathString -> database.getReference("students").child(studentId).child("classrooms").child(pathString) }
+                    classroomOfStudentRef?.removeValue()
+
+                    if (subjectId != null) {
+                        val studentRef =
+                            (classroomId)?.let { pathString -> database.getReference("teachers").child(uid).child("subjects").child(subjectId).child("subjectClassrooms").child(classroomId).child("students").child(studentId)
+                            }
+                        studentRef?.removeValue()
+                    }
                 }
 
                 .setNegativeButton("לא", null)

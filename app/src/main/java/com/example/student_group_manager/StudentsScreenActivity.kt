@@ -24,6 +24,8 @@ import com.google.firebase.database.database
 import kotlin.random.Random
 import android.os.Handler
 import android.os.Looper
+import com.example.student_group_manager.data.Classroom
+import com.example.student_group_manager.data.Subject
 
 private lateinit var auth: FirebaseAuth
 private var studentsList = mutableListOf<Student>()
@@ -69,19 +71,20 @@ class StudentsScreenActivity : AppCompatActivity() {
             }
         })
 
+        val subjectId = intent.getStringExtra("subject_id")
+        val classroomId = intent.getStringExtra("classroom_id")
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = StudentAdapter(studentsList)
+        adapter = StudentAdapter(studentsList, classroomId, subjectId)
         recyclerView.adapter = adapter
 
-        val subjectId = intent.getStringExtra("subject_id")
+
         if (subjectId.isNullOrEmpty()) {
             Toast.makeText(this, "No subject ID provided", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
 
-        val classroomId = intent.getStringExtra("classroom_id")
         if (classroomId.isNullOrEmpty()) {
             Toast.makeText(this, "No classroom ID provided", Toast.LENGTH_SHORT).show()
             finish()
