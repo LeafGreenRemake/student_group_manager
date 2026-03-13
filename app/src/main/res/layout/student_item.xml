@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             android:layoutDirection="rtl"
-            android:text="הסרת התלמיד מהכיתה"
+            android:text="הסרה מהכיתה"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>

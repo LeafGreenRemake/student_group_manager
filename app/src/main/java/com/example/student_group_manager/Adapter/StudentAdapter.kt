@@ -43,7 +43,7 @@ class StudentAdapter(private val students: MutableList<Student>, private val cla
             val context = holder.itemView.context
 
             AlertDialog.Builder(context)
-                .setMessage("למחוק את התלמיד מהכיתה?")
+                .setMessage("להסיר את התלמיד/ה מהכיתה?")
                 .setPositiveButton("כן") { _, _ ->
                     val classroomOfStudentRef =
                         classroomId?.let { pathString -> database.getReference("students").child(studentId).child("classrooms").child(pathString) }
