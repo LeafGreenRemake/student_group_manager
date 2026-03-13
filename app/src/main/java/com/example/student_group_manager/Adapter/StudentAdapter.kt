@@ -9,8 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.student_group_manager.R
 import com.example.student_group_manager.data.Student
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import android.content.Intent
+import com.google.firebase.database.database
 
 class StudentAdapter(private val students: MutableList<Student>) : RecyclerView.Adapter<StudentAdapter.ViewHolder>() {
+
+    private lateinit var auth: FirebaseAuth
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameTv: TextView = view.findViewById(R.id.student_name_tv)
@@ -26,13 +33,21 @@ class StudentAdapter(private val students: MutableList<Student>) : RecyclerView.
         val student = students[position]
         holder.nameTv.text = student.name
 
+        auth = Firebase.auth
+        val currentUser = auth.currentUser
+        val uid = currentUser?.uid ?: return
+        val studentId = student.id
+        val database = Firebase.database
+
+
         holder.removeButton.setOnClickListener {
             val context = holder.itemView.context
 
             AlertDialog.Builder(context)
                 .setMessage("למחוק את התלמיד מהכיתה?")
                 .setPositiveButton("כן") { _, _ ->
-
+                    val studentRef = database.getReference("students").child(studentId)
+                    studentRef.removeValue()
                 }
 
                 .setNegativeButton("לא", null)
