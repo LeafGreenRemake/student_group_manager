@@ -9,8 +9,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.student_group_manager.Adapter.ClassroomsOfStudentAdapter
 import com.example.student_group_manager.data.Classroom
 import com.example.student_group_manager.data.Student
@@ -30,7 +28,7 @@ class ClassroomsOfStudents : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.classes_screen)
+        setContentView(R.layout.classroom_of_student)
         supportActionBar?.hide()
 
         val logoutButton: Button = findViewById(R.id.logout_button)
@@ -60,13 +58,6 @@ class ClassroomsOfStudents : AppCompatActivity() {
             }
         })
 
-        // Set up RecyclerView for classrooms
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)  // Assume ID in layout
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ClassroomsOfStudentAdapter(classroomsList)
-        recyclerView.adapter = adapter
-
-        loadClassrooms(uid)  // Load joined classrooms
 
         logoutButton.setOnClickListener {
             auth.signOut()
